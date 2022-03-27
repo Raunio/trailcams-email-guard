@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  trailcams-email-guard
+
+  SAM Template for trailcams-email-guard
+  
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  EmailGuardFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: email-guard/
+      Handler: app.lambdaHandler
+      Runtime: nodejs14.x
+      Architectures:
+        - x86_64
+Outputs:
+  EmailGuardFunction:
+    Description: "Email Guard Lambda Function ARN"
+    Value: !GetAtt EmailGuardFunction.Arn
+  EmailGuardFunctionIamRole:
+    Description: "Implicit IAM Role created for Email Guard function"
+    Value: !GetAtt EmailGuardFunctionRole.Arn
